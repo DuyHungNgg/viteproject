@@ -1,6 +1,7 @@
 import CategoryItem from "./CategoryItem";
 import RecentPost from "./RecentPost";
 
+
 export default function Sidebar() {
   return (
     <aside className="space-y-10">

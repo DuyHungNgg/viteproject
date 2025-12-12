@@ -2,7 +2,7 @@ import Link from "next/link";
 import { products } from "../mockup/products";
 
 import Header from "../components/Default/Header";
-import Pagination from "../components/Pagination";
+import Pagination from "../components/Default/Pagination";
 import BannerFooter from "../components/Default/BannerFooter";
 import Footer from "../components/Default/Footer";
 

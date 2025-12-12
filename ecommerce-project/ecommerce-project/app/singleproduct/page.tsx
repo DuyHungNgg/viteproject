@@ -4,8 +4,8 @@ import Link from "next/link";
 import { products } from "../mockup/products";
 
 import Header from "../components/Default/Header";
-import Footer from "../components/Default/Footer";
 import ProductCard from "../components/ProductCard";
+import Footer from "../components/Default/Footer";
 
 export default function SingleProductPage() {
   return (
