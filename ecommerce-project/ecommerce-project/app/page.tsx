@@ -2,12 +2,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import ProductCard from "./components/ProductCard";
+import ProductCard from "./components/product/ProductCard";
 import { products } from "./mockup/products";
 
-import Header from "./components/Default/Header";
-import Slider from "./components/Home/Slider";
-import Footer from "./components/Default/Footer";
+import Header from "./components/layout/Header";
+import Slider from "./components/home/Slider";
+import Footer from "./components/layout/Footer";
 
 export default function Home() {
   return (

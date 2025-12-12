@@ -2,7 +2,7 @@
 
 import { useState } from "react";
 import Link from "next/link";
-import CartOverlay from "./CartOverlay"; // chỉnh path đúng theo dự án bạn
+import CartOverlay from "../overlay/CartOverlay"; // chỉnh path đúng theo dự án bạn
 
 export default function Header() {
   const [showOverlay, setShowOverlay] = useState(false);

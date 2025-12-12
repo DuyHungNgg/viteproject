@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import Header from "../components/Default/Header";
-import BannerFooter from "../components/Default/BannerFooter";
-import Footer from "../components/Default/Footer";
+import Header from "../components/layout/Header";
+import BannerFooter from "../components/layout/BannerFooter";
+import Footer from "../components/layout/Footer";
 
 export default function ContactPage() {
   return (

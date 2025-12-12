@@ -1,13 +1,13 @@
 import Link from "next/link";
 import { products } from "../mockup/products";
 
-import Header from "../components/Default/Header";
-import Pagination from "../components/Default/Pagination";
-import BannerFooter from "../components/Default/BannerFooter";
-import Footer from "../components/Default/Footer";
+import Header from "../components/layout/Header";
+import Pagination from "../components/layout/Pagination";
+import BannerFooter from "../components/layout/BannerFooter";
+import Footer from "../components/layout/Footer";
 
 // app/shop/page.tsx
-import ProductCard from "../components/ProductCard";
+import ProductCard from "../components/product/ProductCard";
 
 export default function ShopPage() {
   return (

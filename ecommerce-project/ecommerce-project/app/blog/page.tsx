@@ -2,13 +2,13 @@ import Image from "next/image";
 import Link from "next/link";
 
 // app/blog/page.tsx
-import BlogPost from "../components/Blog/BlogPost";
-import Sidebar from "../components/Blog/Sidebar";
+import BlogPost from "../components/blog/BlogPost";
+import Sidebar from "../components/blog/Sidebar";
 
-import Header from "../components/Default/Header";
-import Pagination from "../components/Default/Pagination";
-import BannerFooter from "../components/Default/BannerFooter";
-import Footer from "../components/Default/Footer";
+import Header from "../components/layout/Header";
+import Pagination from "../components/layout/Pagination";
+import BannerFooter from "../components/layout/BannerFooter";
+import Footer from "../components/layout/Footer";
 
 
 export default function BlogPage() {

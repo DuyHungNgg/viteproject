@@ -4,8 +4,8 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import Header from "../components/Default/Header";
-import Footer from "../components/Default/Footer";
+import Header from "../components/layout/Header";
+import Footer from "../components/layout/Footer";
 
 export default function CartPage() {
   return (
@@ -33,7 +33,7 @@ export default function CartPage() {
       {/* ===== NỘI DUNG CART GỐC (TABLE) ===== */}
       <section className="mx-auto flex max-w-8xl flex-col gap-10 px-6 py-16 lg:flex-row ">
         {/* LEFT: BẢNG SẢN PHẨM */}
-        <div className="flex-[2]">
+        <div className="flex-2">
           <div className="grid grid-cols-[1fr_1.4fr_1.3fr_0.5fr_1.3fr_0.5fr] bg-[#FFF3E3] px-8 py-3 text-xs font-semibold text-gray-600 text-left">
             <span></span>
             <span>Product</span>
@@ -86,7 +86,7 @@ export default function CartPage() {
         </div>
 
         {/* RIGHT: CART TOTALS */}
-        <aside className="flex-[1]">
+        <aside className="flex-1">
           <div className="h-full rounded-sm bg-[#FFF3E3] px-20 py-10">
             <h2 className="mb-8 text-3xl text-center font-semibold text-gray-900">
               Cart Totals

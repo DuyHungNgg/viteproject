@@ -3,9 +3,9 @@ import Link from "next/link";
 
 import { products } from "../mockup/products";
 
-import Header from "../components/Default/Header";
-import ProductCard from "../components/ProductCard";
-import Footer from "../components/Default/Footer";
+import Header from "../components/layout/Header";
+import ProductCard from "../components/product/ProductCard";
+import Footer from "../components/layout/Footer";
 
 export default function SingleProductPage() {
   return (
@@ -35,7 +35,7 @@ export default function SingleProductPage() {
                     <div className="flex flex-col gap-4">
                         {["/img/prod1.jpg", "/img/prod2.jpg", "/img/prod3.jpg", "/img/prod4.jpg"].map(
                             (src, idx) => (
-                            <button
+                            <button aria-label="..."
                                 key={idx}
                                 className="relative h-16 w-16 overflow-hidden rounded-lg border border-gray-200 hover:border-[#B88E2F]"
                             >
@@ -103,9 +103,9 @@ export default function SingleProductPage() {
                     <div className="space-y-2">
                         <p className="text-xs font-semibold text-gray-500">Color</p>
                         <div className="flex gap-3">
-                            <button className="h-6 w-6 rounded-full bg-[#816BFF]" />
-                            <button className="h-6 w-6 rounded-full bg-black" />
-                            <button className="h-6 w-6 rounded-full bg-[#B88E2F]" />
+                            <button aria-label="color" className="h-6 w-6 rounded-full bg-[#816BFF]" />
+                            <button aria-label="color" className="h-6 w-6 rounded-full bg-black" />
+                            <button aria-label="color" className="h-6 w-6 rounded-full bg-[#B88E2F]" />
                         </div>
                     </div>
 
