@@ -13,7 +13,7 @@ export default function Slider() {
       centeredSlides={false}
       pagination={{ clickable: true }}
       modules={[Pagination]}
-      className="mySwiper w-full h-[500px]"
+      className="mySwiper"
     >
       <SwiperSlide>
         <div className="slide-inner">

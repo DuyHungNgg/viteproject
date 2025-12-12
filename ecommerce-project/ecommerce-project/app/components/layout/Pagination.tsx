@@ -1,46 +1,60 @@
 "use client";
 
-export default function Pagination() {
+type PaginationProps = {
+  currentPage: number;
+  totalPages: number;
+  onPageChange: (page: number) => void;
+};
+
+export default function Pagination({
+  currentPage,
+  totalPages,
+  onPageChange,
+}: PaginationProps) {
+  if (totalPages <= 1) return null;
+
+  const pages = Array.from({ length: totalPages }, (_, i) => i + 1);
+
+  const goTo = (page: number) => {
+    if (page < 1 || page > totalPages) return;
+    onPageChange(page);
+    window.scrollTo({ top: 0, behavior: "smooth" }); // optional: lên đầu trang
+  };
 
   return (
-    <main>
-        {/* Pagination – cuối trang */}
-        <section className="flex justify-center ">
-            <div className="flex gap-3">
+    <section className="flex justify-center">
+      <div className="flex gap-3">
+        {pages.map((page) => {
+          const isActive = page === currentPage;
 
-                {/* Trang 1 – đang được chọn */}
-                <button
-                className="w-10 h-10 rounded-md bg-[#B88E2F] text-white text-sm font-thin
-                            flex items-center justify-center"
-                >
-                1
-                </button>
+          return (
+            <button
+              key={page}
+              onClick={() => goTo(page)}
+              className={
+                isActive
+                  ? "w-10 h-10 rounded-md bg-[#B88E2F] text-white text-sm font-thin flex items-center justify-center"
+                  : "w-10 h-10 rounded-md bg-[#F9F3EB] text-gray-700 text-sm font-thin flex items-center justify-center hover:bg-[#e8dcc6]"
+              }
+            >
+              {page}
+            </button>
+          );
+        })}
 
-                {/* Trang 2 */}
-                <button
-                className="w-10 h-10 rounded-md bg-[#F9F3EB] text-gray-700 text-sm font-thin
-                            flex items-center justify-center hover:bg-[#e8dcc6]"
-                >
-                2
-                </button>
-
-                {/* Trang 3 */}
-                <button
-                className="w-10 h-10 rounded-md bg-[#F9F3EB] text-gray-700 text-sm font-thin
-                            flex items-center justify-center hover:bg-[#e8dcc6]"
-                >
-                3
-                </button>
-
-                {/* Next */}
-                <button
-                className="px-4 h-10 rounded-md bg-[#F9F3EB] text-gray-700 text-sm font-thin
-                            flex items-center justify-center hover:bg-[#e8dcc6]"
-                >
-                Next
-                </button>
-            </div>
-        </section>
-    </main>
-    );
+        <button
+          onClick={() => goTo(currentPage + 1)}
+          disabled={currentPage >= totalPages}
+          className={`px-4 h-10 rounded-md text-sm font-thin flex items-center justify-center
+            ${
+              currentPage >= totalPages
+                ? "bg-[#F9F3EB] text-gray-400 cursor-not-allowed"
+                : "bg-[#F9F3EB] text-gray-700 hover:bg-[#e8dcc6]"
+            }`}
+        >
+          Next
+        </button>
+      </div>
+    </section>
+  );
 }

@@ -1,5 +1,6 @@
-import Link from "next/link";
-import { products } from "../mockup/products";
+"use client";
+
+import { useMemo, useState } from "react";
 
 import Header from "../components/layout/Header";
 import Pagination from "../components/layout/Pagination";
@@ -8,8 +9,25 @@ import Footer from "../components/layout/Footer";
 
 // app/shop/page.tsx
 import ProductCard from "../components/product/ProductCard";
+import { products } from "../mockup/products";
 
 export default function ShopPage() {
+    const [currentPage, setCurrentPage] = useState(1);
+
+    // nếu bạn muốn cho select "Show" hoạt động sau này, đổi chỗ này thành state
+    const [itemsPerPage, setItemsPerPage] = useState(16);
+
+
+    const totalPages = Math.ceil(products.length / itemsPerPage);
+
+    const startIndex = (currentPage - 1) * itemsPerPage;
+    const endIndex = Math.min(startIndex + itemsPerPage, products.length);
+
+    const currentProducts = useMemo(
+    () => products.slice(startIndex, endIndex),
+    [startIndex, endIndex, itemsPerPage]
+    );
+
   return (
     <main className="min-h-screen bg-white">
         < Header />
@@ -50,7 +68,7 @@ export default function ShopPage() {
                     </div>
 
                     <span className="text-gray-500">
-                        Showing 1–16 of 32 results
+                        Showing {startIndex} – {endIndex} of {products.length} results
                     </span>
                 </div>
 
@@ -59,22 +77,16 @@ export default function ShopPage() {
                     <span className="text-gray-600">Show</span>
                     <select
                         aria-label="Select number of items to show"
-                        className="w-12 border border-gray-300 rounded px-2 py-1 text-sm"
+                        className="w-15 border border-gray-300 rounded px-2 py-1 text-sm"
+                        value={itemsPerPage}
+                        onChange={(e) => {
+                            setItemsPerPage(Number(e.target.value));
+                            setCurrentPage(1); // reset về trang 1
+                        }}
                         >
-                        <option>16</option>
-                        <option>12</option>
-                        <option>8</option>
-                    </select>
-
-                    <span className="text-gray-600">Sort by</span>
-                    <select
-                        aria-label="Select sorting option"
-                        className="w-40 border border-gray-300 rounded px-3 py-1 text-sm"
-                        >
-                        <option>Default</option>
-                        <option>Price: low to high</option>
-                        <option>Price: high to low</option>
-                        <option>Name</option>
+                        <option value={16}>16</option>
+                        <option value={12}>12</option>
+                        <option value={8}>8</option>
                     </select>
                 </div>
             </div>
@@ -83,7 +95,7 @@ export default function ShopPage() {
         {/* GRID SẢN PHẨM */}
         <section className="px-20 py-10">
             <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
-            {products.map((p, i) => (
+            {currentProducts.map((p, i) => (
                 <ProductCard
                 key={i}
                 img={p.img}
@@ -94,9 +106,14 @@ export default function ShopPage() {
             ))}
             </div>
         </section>
-        
-        < Pagination />
 
+        {/* CHỈ ĐỂ 1 Pagination */}
+        <Pagination
+        currentPage={currentPage}
+        totalPages={totalPages}
+        onPageChange={setCurrentPage}
+        />
+        
         < BannerFooter />
 
         < Footer />

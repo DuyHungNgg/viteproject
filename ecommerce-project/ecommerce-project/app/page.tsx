@@ -139,12 +139,11 @@ export default function Home() {
       </section>
 
       <section>
-        <div className="bg-[#FFF3E3] w-1440px h-560px"> 
+        <div className="bg-[#FFF3E3] w-full h-[580px]"> 
           {/* inspiration */}
           <div className="items-center grid grid-cols-[30%_60%] gap-4 mt-6 ">
             {/* text */}
-            <div className="text-justify pl-20">
-              <div className="text-left">
+            <div className="pl-20 text-left">
                 <h2 className="text-3xl font-bold mb-2">
                 50+ Beautiful rooms inspiration</h2>
                   <p className="text-gray-600 mb-6">
@@ -153,10 +152,9 @@ export default function Home() {
                 <button className="px-6 py-3 bg-yellow-600 text-white font-semibold hover:bg-[#a0781f] transition" >
                     Explore More
                 </button>
-              </div>
             </div>
 
-            <div className="w-full mx-auto items-center h-[520px]">
+            <div className="w-full mt-5">
               <Slider/>
             </div>
           </div>
