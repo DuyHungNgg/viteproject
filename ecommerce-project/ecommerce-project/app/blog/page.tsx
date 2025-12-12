@@ -5,10 +5,10 @@ import Link from "next/link";
 import BlogPost from "../components/BlogPost";
 import Sidebar from "../components/Sidebar";
 
-import Header from "../components/Header";
+import Header from "../components/Default/Header";
 import Pagination from "../components/Pagination";
-import BannerFooter from "../components/BannerFooter";
-import Footer from "../components/Footer";
+import BannerFooter from "../components/Default/BannerFooter";
+import Footer from "../components/Default/Footer";
 
 
 export default function BlogPage() {

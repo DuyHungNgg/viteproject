@@ -10,7 +10,7 @@ export default function Footer() {
         {/* ===== FOOTER ===== */}
         <section>
             <div className="footer ">
-                <div className="w-full my-5 mx-auto h-px bg-gray-200"></div>
+                <div className="w-full my-5 mx-auto h-px bg-gray-200"></div> <div className="w-full my-5 mx-auto h-px bg-gray-200"></div> <div className="w-full my-5 mx-auto h-px bg-gray-200"></div> <div className="w-full my-5 mx-auto h-px bg-gray-200"></div>
                 <div className="grid grid-cols-[35%_10%_15%_35%] gap-4 mx-20">
                     <div className="text-left">
                         <h1 className="text-base font-bold mb-10">Furniro.</h1>

@@ -1,9 +1,9 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import Header from "../components/Header";
-import BannerFooter from "../components/BannerFooter";
-import Footer from "../components/Footer";
+import Header from "../components/Default/Header";
+import BannerFooter from "../components/Default/BannerFooter";
+import Footer from "../components/Default/Footer";
 
 import {
   compareProducts,
@@ -159,7 +159,7 @@ export default function ComparePage() {
         </section>
 
         < BannerFooter />
-        
+
         < Footer />
     
     </main>

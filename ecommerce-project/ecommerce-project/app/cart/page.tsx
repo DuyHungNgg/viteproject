@@ -4,9 +4,9 @@ import { useState } from "react";
 import Image from "next/image";
 import Link from "next/link";
 
-import Header from "../components/Header";
-import BannerFooter from "../components/BannerFooter";
-import Footer from "../components/Footer";
+import Header from "../components/Default/Header";
+import BannerFooter from "../components/Default/BannerFooter";
+import Footer from "../components/Default/Footer";
 
 export default function CartPage() {
   const [showOverlay, setShowOverlay] = useState(false);

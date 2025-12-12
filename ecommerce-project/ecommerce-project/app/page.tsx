@@ -5,9 +5,9 @@ import Link from "next/link";
 import ProductCard from "./components/ProductCard";
 import { products } from "./mockup/products";
 
-import Header from "./components/Header";
+import Header from "./components/Default/Header";
 import Slider from "./components/Slider";
-import Footer from "./components/Footer";
+import Footer from "./components/Default/Footer";
 
 export default function Home() {
   return (
