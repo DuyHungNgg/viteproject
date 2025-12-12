@@ -139,7 +139,7 @@ export default function Home() {
       </section>
 
       <section>
-        <div className="bg-[#FFF3E3] w-full h-[580px]"> 
+        <div className="bg-[#FFF3E3] w-full h-[500px]"> 
           {/* inspiration */}
           <div className="items-center grid grid-cols-[30%_60%] gap-4 mt-6 ">
             {/* text */}

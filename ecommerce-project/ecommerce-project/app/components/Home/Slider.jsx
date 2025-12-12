@@ -10,7 +10,8 @@ export default function Slider() {
     <Swiper
       slidesPerView={1.5}          // 1 ảnh chính + 1/2 ảnh kế bên
       spaceBetween={30}
-      centeredSlides={false}
+      centeredSlides={true}
+      loop={true}
       pagination={{ clickable: true }}
       modules={[Pagination]}
       className="mySwiper"
@@ -36,7 +37,7 @@ export default function Slider() {
       <SwiperSlide>
         <div className="slide-inner">
           <img
-            src="img/1-sofa-long-vu_f3541e66e216483997bb955660dccc01_grande.jpg"
+            src="img/sofa-da-bo-y-1177-1-1.jpg"
             className="w-full h-full object-cover rounded-xl"
           />
         </div>
