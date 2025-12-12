@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+:root {
+  --background: #ffffff;
+  --foreground: #171717;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --background: #0a0a0a;
+    --foreground: #ededed;
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+/* --- Swiper active & next effect --- */
+
+/* Căn giữa nội dung slide theo chiều ngang + dọc */
+.mySwiper .swiper-slide {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Slide ACTIVE: to, rõ, không blur */
+.mySwiper .swiper-slide-active img {
+  transform: scale(1);
+  opacity: 1;
+  filter: blur(0);
+  transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
+}
+
+/* Slide NEXT (ảnh 1/2 bên phải): nhỏ hơn + mờ */
+.mySwiper .swiper-slide-next img {
+  transform: scale(0.85);   /* nhỏ hơn ~15% so với active */
+  opacity: 0.3;             /* mờ */
+  filter: blur(4px);        /* làm mờ */
+  transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
+}
+
+/* Cho mượt toàn bộ ảnh trong swiper */
+.mySwiper .swiper-slide img {
+  transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
+}
+
+/* Tất cả slide: khung ảnh nhỏ & mờ hơn */
+.mySwiper .slide-inner {
+  transform: scale(0.85);        /* nhỏ hơn ~15% */
+  opacity: 0.3;                  /* mờ hơn */
+  filter: blur(3px);
+  transition: transform 0.4s ease, opacity 0.4s ease, filter 0.4s ease;
+}
+
+/* Slide ACTIVE: khung ảnh to, rõ, không mờ */
+.mySwiper .swiper-slide-active .slide-inner {
+  transform: scale(1);
+  opacity: 1;
+  filter: blur(0);
+}
+
+.shop-banner {
+  background-image: url('/img/img-banner-detail.png');
+  background-size: cover;
+  background-position: center;
+}
