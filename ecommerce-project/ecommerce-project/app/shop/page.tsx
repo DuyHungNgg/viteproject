@@ -3,6 +3,7 @@
 import { useMemo, useState } from "react";
 
 import Header from "../components/layout/Header";
+import BannerHeader from "../components/layout/BannerHeader";
 import Pagination from "../components/layout/Pagination";
 import BannerFooter from "../components/layout/BannerFooter";
 import Footer from "../components/layout/Footer";
@@ -32,21 +33,10 @@ export default function ShopPage() {
     <main className="min-h-screen bg-white">
         < Header />
 
-        {/* BANNER SHOP */}
-        <section className="relative h-[300px] flex items-center justify-center">
-            <img
-                src="/img/banner-mo.jpg"
-                alt=""
-                className="absolute inset-0 w-full h-full object-cover "
-            />
-            <div className="absolute inset-0 bg-white/60"></div>
-            <div className="relative text-center">
-                <h1 className="text-3xl font-bold">Shop</h1>
-                <p className="mt-2 text-gray-700">
-                <span className="font-semibold">Home</span> &gt; Shop
-                </p>
-            </div>
-        </section>
+        <BannerHeader
+            title="Shop"
+            crumbs={[{ label: "Home" }, { label: "Shop" }]}
+        />
 
         {/* THANH FILTER / SORT (khung xanh trong hình) */}
         <section className="bg-[#FAF3EA] py-4 px-6 mt-4 ">
@@ -95,15 +85,18 @@ export default function ShopPage() {
         {/* GRID SẢN PHẨM */}
         <section className="px-20 py-10">
             <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
-            {currentProducts.map((p, i) => (
-                <ProductCard
-                key={i}
-                img={p.img}
-                name={p.name}
-                desc={p.desc}
-                price={p.price}
-                />
-            ))}
+                {currentProducts.map((p) => (
+                    <ProductCard
+                        key={p.id}
+                        id={p.id}
+                        img={p.img}
+                        name={p.name}
+                        desc={p.desc}
+                        price={p.price}
+                        oldPrice={p.oldPrice}
+                        badge={p.badge}
+                    />
+                ))}
             </div>
         </section>
 

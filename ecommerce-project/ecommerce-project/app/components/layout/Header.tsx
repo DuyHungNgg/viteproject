@@ -8,7 +8,7 @@ export default function Header() {
   const [showOverlay, setShowOverlay] = useState(false);
 
   return (
-    <main>
+    <>
       {/* Overlay tách riêng */}
       <CartOverlay open={showOverlay} onClose={() => setShowOverlay(false)} />
 
@@ -41,6 +41,6 @@ export default function Header() {
           </div>
         </div>
       </header>
-    </main>
+    </>
   );
 }

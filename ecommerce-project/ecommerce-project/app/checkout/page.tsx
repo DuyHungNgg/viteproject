@@ -1,39 +1,29 @@
 "use client";
 
 import React, { useState } from "react";
+import { useCart } from "../context/CartContext";
 
 import Image from "next/image";
 import Link from "next/link";
 
 import Header from "../components/layout/Header";
+import BannerHeader from "../components/layout/BannerHeader";
 import BannerFooter from "../components/layout/BannerFooter";
 import Footer from "../components/layout/Footer";
 
 export default function CheckOutPage() {
-    const [payment, setPayment] = useState<"bank" | "transfer" | "cod">("bank");
+  const [payment, setPayment] = useState<"bank" | "transfer" | "cod">("bank");
+  const { items, subtotal, total } = useCart();
+
   return (
     <main className="min-h-screen bg-white">
+
         < Header />
-
-        {/* BANNER SHOP */}
-        <section>
-            <div className="relative h-[300px] flex items-center justify-center">
-                <img
-                    src="/img/banner-mo.jpg"
-                    alt=""
-                    className="absolute inset-0 w-full h-full object-cover "
-                />
-
-                <div className="absolute inset-0 bg-white/50"></div>
-
-                <div className="relative text-center">
-                    <h1 className="text-4xl font-bold">Checkout</h1>
-                    <p className="mt-2 text-gray-700">
-                    <span className="font-semibold">Home</span> &gt; Checkout
-                    </p>
-                </div>
-            </div>
-        </section>
+        
+        < BannerHeader
+            title="Checkout"
+            crumbs={[{ label: "Home" }, { label: "Checkout" }]}
+        />
         
         <section className="mx-auto grid grid-cols-1 md:grid-cols-[55%_40%]   max-w-6xl gap-16 px-6 py-16">
             {/* LEFT: BILLING DETAILS */}
@@ -217,25 +207,30 @@ export default function CheckOutPage() {
                     <h2 className="text-base font-bold">Product</h2>
                     <h2 className="text-right text-base font-bold">Subtotal</h2>
 
-                    <p className="mt-2 text-xs text-gray-500">
-                        Asgaard sofa &nbsp; × 1
-                    </p>
-                    <p className="mt-2 text-right text-xs text-gray-700">
-                        Rs. 250,000.00
-                    </p>
+                    {items.map((item) => (
+                        <React.Fragment key={item.id}>
+                            <p className="mt-2 text-xs text-gray-500">
+                            {item.name} × {item.qty}
+                            </p>
+                            <p className="mt-2 text-right text-xs text-gray-700">
+                            Rs. {(item.price * item.qty).toLocaleString()}
+                            </p>
+                        </React.Fragment>
+                    ))}
+
 
                     <p className="mt-4 text-xs font-semibold">Subtotal</p>
                     <p className="mt-4 text-right text-xs text-gray-700">
-                        Rs. 250,000.00
+                        Rs. {subtotal.toLocaleString()}
                     </p>
 
                     <p className="mt-4 text-xs font-semibold">Total</p>
                     <p className="mt-4 text-right text-sm font-bold text-[#B88E2F]">
-                        Rs. 250,000.00
+                        Rs. {total.toLocaleString()}
                     </p>
                 </div>
 
-                <hr className="border-gray-200" />
+                <hr className="border-gray-300" />
 
                 {/* Payment methods – giống layout gốc (1 cái đậm, 2 cái nhạt) */}
                 {/* Payment methods – 3 dot chọn được */}
@@ -314,7 +309,7 @@ export default function CheckOutPage() {
 
                 {/* Button */}
                 <div className="flex justify-center">
-                    <button className="mt-4 w-70 mx-auto rounded-xl border border-gray-400 px-6 py-3 text-base font-medium transition hover:bg-[#B88E2F] hover:text-white">
+                    <button className="mt-4 w-72 mx-auto rounded-xl border border-gray-400 px-6 py-3 text-base font-medium transition hover:bg-[#B88E2F] hover:text-white">
                     Place order
                     </button>
                 </div>

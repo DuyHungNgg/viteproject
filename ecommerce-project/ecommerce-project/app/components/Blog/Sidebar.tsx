@@ -1,23 +1,29 @@
 import CategoryItem from "./CategoryItem";
 import RecentPost from "./RecentPost";
+import type { Blog } from "@/app/blog/page";
 
+type SidebarProps = {
+  blogs: Blog[];
+};
 
-export default function Sidebar() {
+export default function Sidebar({ blogs }: SidebarProps) {
+  const recent = blogs.slice(0, 3); // nếu muốn “mới nhất”, xem note bên dưới
+
   return (
-    <aside className="space-y-10">
-
+    <aside className="mx-auto w-[80%] space-y-10">
       {/* SEARCH */}
-      <div className="flex items-center border px-3 py-2 rounded-lg">
+      <div className="flex items-center rounded-lg border px-3 py-2">
         <input
           placeholder="Search"
           className="flex-1 outline-none"
+          aria-label="Search"
         />
         <span>🔍</span>
       </div>
 
       {/* CATEGORIES */}
       <div className="pl-3 pr-7">
-        <h3 className="text-xl font-semibold mb-4">Categories</h3>
+        <h3 className="mb-4 text-xl font-semibold">Categories</h3>
 
         <CategoryItem name="Crafts" count={2} />
         <CategoryItem name="Design" count={8} />
@@ -26,13 +32,13 @@ export default function Sidebar() {
         <CategoryItem name="Wood" count={6} />
       </div>
 
-      {/* RECENT POSTS */}
+      {/* RECENT POSTS (từ API) */}
       <div className="pl-3 pt-10">
-        <h3 className="text-xl font-bold mb-4">Recent Posts</h3>
+        <h3 className="mb-4 text-xl font-bold">Recent Posts</h3>
 
-        <RecentPost title="Going all in with millennial design" img="/img/blog/blog1.avif" />
-        <RecentPost title="Exploring new ways of decorating" img="/img/blog/blog2.jpg" />
-        <RecentPost title="Handmade pieces that took time" img="/img/blog/blog3.webp" />
+        {recent.map((b) => (
+          <RecentPost key={b.id} title={b.title} img={b.image} />
+        ))}
       </div>
     </aside>
   );

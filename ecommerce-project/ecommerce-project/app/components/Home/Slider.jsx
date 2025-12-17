@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { Swiper, SwiperSlide } from "swiper/react";
 import "swiper/css";
 import "swiper/css/pagination";
@@ -8,40 +9,31 @@ import { Pagination } from "swiper/modules";
 export default function Slider() {
   return (
     <Swiper
-      slidesPerView={1.5}          // 1 ảnh chính + 1/2 ảnh kế bên
-      spaceBetween={30}
-      centeredSlides={true}
-      loop={true}
+      // responsive theo kích thước màn hình
+      breakpoints={{
+        0: { slidesPerView: 1.05, spaceBetween: 12 },     // mobile
+        640: { slidesPerView: 1.2, spaceBetween: 16 },    // sm
+        768: { slidesPerView: 1.5, spaceBetween: 24 },    // md
+        1024: { slidesPerView: 1.8, spaceBetween: 30 },   // lg
+      }}
+      centeredSlides
+      loop
       pagination={{ clickable: true }}
       modules={[Pagination]}
-      className="mySwiper"
+      className="mt-20 w-full"
     >
-      <SwiperSlide>
-        <div className="slide-inner">
-          <img
-            src="img/sofa-361-1-1.jpg"
-            className="w-full h-full object-cover rounded-xl"
-          />
-        </div>
-      </SwiperSlide>
-
-      <SwiperSlide>
-        <div className="slide-inner">
-          <img
-            src="img/sofa-da-bo-y-1177-1-1.jpg"
-            className="w-full h-full object-cover rounded-xl"
-          />
-        </div>
-      </SwiperSlide>
-
-      <SwiperSlide>
-        <div className="slide-inner">
-          <img
-            src="img/sofa-da-bo-y-1177-1-1.jpg"
-            className="w-full h-full object-cover rounded-xl"
-          />
-        </div>
-      </SwiperSlide>
+      {[
+        "/img/share/1.jpg",
+        "/img/share/2.webp",
+        "/img/share/3.jpg",
+      ].map((src, idx) => (
+        <SwiperSlide key={idx}>
+          {/* dùng aspect ratio để tự co giãn chiều cao */}
+          <div className="relative w-full overflow-hidden rounded-xl aspect-[16/10] md:aspect-[16/9]">
+            <Image src={src} alt={`slide-${idx}`} fill className="object-cover" />
+          </div>
+        </SwiperSlide>
+      ))}
     </Swiper>
   );
 }

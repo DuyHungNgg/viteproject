@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 type BlogPostProps = {
   image: string;
@@ -6,7 +7,9 @@ type BlogPostProps = {
   date: string;
   category: string;
   description: string;
+  slug: string; 
 };
+
 
 export default function BlogPost({
   image,
@@ -14,10 +17,11 @@ export default function BlogPost({
   date,
   category,
   description,
+  slug,
 }: BlogPostProps) {
   return (
-    <article className="w-175">
-      <div className="relative h-125 w-full overflow-hidden rounded-xl">
+    <article className="mx-auto w-[80%]">
+      <div className="relative h-[400px] w-full overflow-hidden rounded-xl">
         <Image src={image} alt={title} fill className="object-cover" />
       </div>
 
@@ -30,9 +34,12 @@ export default function BlogPost({
       <h2 className="mt-3 text-2xl font-bold">{title}</h2>
       <p className="mt-2 leading-relaxed text-gray-600">{description}</p>
 
-      <a className="mt-3 inline-block font-semibold underline-offset-4 hover:underline">
+      <Link
+        href={`/blog/${slug}`}
+        className="mt-3 inline-block font-semibold underline-offset-4 hover:underline"
+      >
         Read more
-      </a>
+      </Link>
     </article>
   );
 }

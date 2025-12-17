@@ -3,12 +3,17 @@
 import Image from "next/image";
 import Link from "next/link";
 
+import { useCart } from "../../context/CartContext";
+
+const format = (n: number) => new Intl.NumberFormat("en-US").format(n);
+
 type CartOverlayProps = {
   open: boolean;
   onClose: () => void;
 };
 
 export default function CartOverlay({ open, onClose }: CartOverlayProps) {
+    const { items, updateQty, removeItem, subtotal, total } = useCart();
   if (!open) return null;
 
   return (
@@ -28,40 +33,49 @@ export default function CartOverlay({ open, onClose }: CartOverlayProps) {
           </button>
         </div>
 
-        <div className="h-px bg-gray-200 mb-4" />
+        <div className="h-px bg-gray-300" />
 
-        {/* ITEM 1 */}
-        <div className="flex items-center gap-3 mb-4">
-          <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-gray-100">
-            <Image src="/img/prod1.jpg" alt="Asgaard sofa" fill className="object-cover" />
-          </div>
-          <div className="flex-1">
-            <h3 className="text-sm font-medium text-gray-800">Asgaard sofa</h3>
-            <p className="text-xs text-gray-600">
-              1 x <span className="text-[#B88E2F]">Rs. 250,000.00</span>
-            </p>
-          </div>
-          <button className="text-gray-500 text-lg">×</button>
-        </div>
+        <div className=" max-h-[500px] overflow-y-auto">
+          {items.map((item) => (
+          <div
+            key={item.id} 
+            className="grid grid-cols-[30%_60%_10%]"
+          >
+            <div className="relative h-10 w-18 overflow-hidden rounded-lg my-3">
+              <Image src={item.image ?? "/img/prod1.jpg"} alt={item.name} fill className="object-cover" />
+            </div>
 
-        {/* ITEM 2 */}
-        <div className="flex items-center gap-3 mb-6">
-          <div className="relative w-16 h-16 rounded-lg overflow-hidden bg-gray-100">
-            <Image src="/img/prod2.jpg" alt="Casaliving Wood" fill className="object-cover" />
-          </div>
-          <div className="flex-1">
-            <h3 className="text-sm font-medium text-gray-800">Casaliving Wood</h3>
-            <p className="text-xs text-gray-600">
-              1 x <span className="text-[#B88E2F]">Rs. 270,000.00</span>
-            </p>
-          </div>
-          <button className="text-gray-500 text-lg">×</button>
-        </div>
+            <div className="content-center">
+                <div className="text-sm text-gray-700">{item.name}</div>
 
-        {/* Subtotal */}
-        <div className="flex justify-between items-center mb-4">
-          <span className="text-sm text-gray-600">Subtotal</span>
-          <span className="text-sm font-semibold text-[#B88E2F]">Rs. 520,000.00</span>
+                <div className="flex ">
+                  <div className="flex mr-2 text-left ">
+                    <input
+                      title="Quantity"
+                      type="number"
+                      min={1}
+                      value={item.qty}
+                      onChange={(e) => updateQty(item.id, Number(e.target.value))}
+                      className="h-full w-12 rounded border border-gray-300 text-center text-sm outline-none mr-2" 
+                    /> x
+                  </div>
+
+                  <div className=" text-sm content-end font-medium text-gray-400">
+                    Rs. {format(item.price)}
+                  </div>
+                </div>
+              </div>
+
+            <button
+              type="button"
+              className="text-[#B88E2F] text-2xl font-black"
+              aria-label="Remove item"
+              onClick={() => removeItem(item.id)}
+            >
+              🗑
+            </button>
+          </div>
+        ))}
         </div>
 
         <div className="w-full h-px bg-gray-500" />

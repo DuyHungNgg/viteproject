@@ -34,7 +34,7 @@ export default function ContactPage() {
         {/* ----------- CONTACT SECTION ----------- */}
         <section>
             {/* ----------- Title Section ----------- */}
-            <div className="text-center mt-20 mb-30">
+            <div className="text-center mt-15 mb-15 ">
                 <h2 className="text-2xl font-bold">Get In Touch With Us</h2>
 
                 <p className="text-gray-500 mt-2 text-sm">
@@ -45,7 +45,7 @@ export default function ContactPage() {
             </div>
 
             {/* ----------- Contact Content ----------- */}
-            <div className="grid grid-cols-[35%_65%] gap-10 max-w-6xl mx-auto pb-5">
+            <div className="mx-auto grid max-w-6xl grid-cols-1 gap-10 px-6 pb-10 lg:grid-cols-[35%_65%]">
 
                 {/* ---------- LEFT : CONTACT INFO ---------- */}
                 <div className="space-y-10">

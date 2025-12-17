@@ -79,7 +79,7 @@ export const compareProducts: CompareProduct[] = [
     id: 1,
     name: "Asgaard Sofa",
     price: 250000,
-    image: "/img/sofa-361-1-1.jpg",
+    image: "/img/prod/prod1.jpg",
     rating: 4.7,
     reviews: 204,
     specs: {
@@ -121,7 +121,7 @@ export const compareProducts: CompareProduct[] = [
     id: 2,
     name: "Outdoor Sofa Set",
     price: 270000,
-    image: "/img/sofa-perry-h-297.jpg",
+    image: "/img/prod/prod2.jpg",
     rating: 3,
     reviews: 189,
     specs: {

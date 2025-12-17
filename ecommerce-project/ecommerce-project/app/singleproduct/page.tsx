@@ -1,13 +1,41 @@
+"use client";
+
 import Image from "next/image";
 import Link from "next/link";
+import { useMemo } from "react";
 
 import { products } from "../mockup/products";
+import { useCart } from "../context/CartContext";
+import ProductCard from "../components/product/ProductCard";
 
 import Header from "../components/layout/Header";
-import ProductCard from "../components/product/ProductCard";
 import Footer from "../components/layout/Footer";
 
 export default function SingleProductPage() {
+    const product = products[0]; // mock tạm, sau này lấy theo params
+
+    const { id, img, name, desc, price, badge, oldPrice } = product;
+
+    const { addItem } = useCart();
+
+    const handleAddToCart = () => {
+        addItem({
+        id,
+        name,
+        price,
+        qty: 1,
+        image: img,
+        });
+    };
+
+    const relatedProducts = useMemo(() => {
+        return [...products]
+        .sort(() => 0.5 - Math.random())
+        .slice(0, 4);
+    }, []);
+
+
+
   return (
     <main className="min-h-screen bg-white">
         < Header />
@@ -37,7 +65,7 @@ export default function SingleProductPage() {
                             (src, idx) => (
                             <button aria-label="..."
                                 key={idx}
-                                className="relative h-16 w-16 overflow-hidden rounded-lg border border-gray-200 hover:border-[#B88E2F]"
+                                className="relative h-16 w-16 overflow-hidden rounded-lg border border-gray-300 hover:border-[#B88E2F]"
                             >
                                 <Image src={src} alt={`thumb-${idx}`} fill className="object-cover" />
                             </button>
@@ -110,7 +138,7 @@ export default function SingleProductPage() {
                     </div>
 
                     {/* Qty + buttons */}
-                    <div className="flex flex-wrap items-center gap-4 pt-2">
+                    <div className="flex lg:flex-wrap items-center gap-4 pt-2">
                         {/* Qty */}
                         <div className="flex items-center border border-gray-300">
                             <button className="px-3 py-2 text-sm">-</button>
@@ -119,12 +147,14 @@ export default function SingleProductPage() {
                         </div>
 
                         {/* Add to cart */}
-                        <Link href={"/cart"}>
-                            <button className="rounded-lg border border-black px-8 py-2 text-sm font-semibold hover:bg-black hover:text-white">
-                                Add To Cart
-                            </button>
-                        </Link>
-                        
+
+                        <button 
+                            onClick={handleAddToCart}
+                            className="rounded-lg border border-black px-8 py-2 text-sm font-semibold hover:bg-black hover:text-white"
+                        >
+                            Add To Cart
+                        </button>
+
                         {/* Compare */}
                         <Link href={"/procomparison"}>
                             <button className="rounded-lg border border-black px-8 py-2 text-sm font-semibold hover:bg-black hover:text-white">
@@ -159,59 +189,81 @@ export default function SingleProductPage() {
                 </div>
             </div>
 
-            <div className="w-full mt-10 mx-auto h-px bg-gray-200"></div>
+            <div className="w-full mt-10 mx-auto h-px bg-gray-300"></div>
 
         </section>
+
+        <section className="w-full">
+            {/* Tabs */}
+            <div className="mx-auto my-10 flex max-w-6xl flex-wrap justify-center gap-6 px-4 sm:gap-10">
+                <p className="text-base font-bold">Description</p>
+                <p className="text-base text-gray-400">Additional Information</p>
+                <p className="text-base text-gray-400">Reviews [5]</p>
+            </div>
+
+            {/* Text */}
+            <div className="mx-auto max-w-4xl px-4 text-justify text-sm font-thin text-gray-400">
+                <p className="mt-5">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit...
+                </p>
+                <p className="mt-5">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Vel, obcaecati. Lorem ipsum dolor sit amet consectetur adipisicing elit. Ut esse aliquam harum quidem sunt! Debitis, rem quidem? Consequuntur totam cumque, eum aliquam magnam ipsa vitae eaque? Facilis et adipisci nostrum rerum fugit, voluptatibus sapiente saepe tempore dignissimos nihil natus pariatur velit corrupti, laudantium, tenetur fuga alias! Ab earum sit pariatur!
+                </p>
+            </div>
+
+            {/* Images */}
+            <div className="mx-auto my-10 grid max-w-6xl grid-cols-1 gap-6 px-4 md:grid-cols-2">
+                <img
+                src="/img/prod/prod7.jpg"
+                alt=""
+                className="h-[220px] w-full rounded-2xl object-cover sm:h-[280px] lg:h-[348px]"
+                />
+                <img
+                src="/img/prod/prod5.jpg"
+                alt=""
+                className="h-[220px] w-full rounded-2xl object-cover sm:h-[280px] lg:h-[348px]"
+                />
+            </div>
+
+            <div className="mx-auto mt-10 h-px w-full max-w-6xl bg-gray-300 px-4" />
+        </section>
+
 
         <section>
-            <div className="flex flex-1 justify-center mt-5  my-[43px] w-full">
-                <p className="font-bold mx-15 text-base">Descriostion</p>
-                <p className="text-gray-400 mx-15 text-base">Additional Information</p>
-                <p className="text-gray-400 mx-15 text-base">Reviews [5]</p>
-            </div>
-            <div className="text-justify justify-items-center mx-auto text-sm text-gray-400 font-thin  w-[1026px]">
-                <p className="mt-5"> Lorem ipsum dolor sit amet, consectetur adipisicing elit. Nam quod ab, perspiciatis maxime, nemo assumenda eum nesciunt officiis placeat, eveniet dolor saepe excepturi quibusdam. Voluptate magni praesentium recusandae doloremque omnis.Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa molestias quod totam omnis hic cum tempore dolorem nam voluptatem</p>
-                <p className="mt-5">Lorem ipsum dolor sit amet consectetur, adipisicing elit. Suscipit possimus harum labore. Exercitationem temporibus et harum sed nulla consectetur reprehenderit iure quae laborum voluptate autem recusandae ex eligendi consequatur nam perferendis nobis accusamus ipsum, aliquam illo earum non blanditiis tempora quibusdam. Suscipit nisi aperiam sequi minima et molestias officia. Cumque.</p>
-            </div>
-            <div className="grid grid-cols-2 justify-items-center mx-auto my-10">
-                <img src="/img/prod/prod7.jpg" alt="" className=" w-[605px] h-[348px] rounded-2xl object-cover"/>
-                <img src="/img/prod/prod5.jpg" alt="" className=" w-[605px] h-[348px] rounded-2xl object-cover"/>
-            </div>
-            <div className="w-full mt-10 mx-auto h-px bg-gray-200"></div>
-        </section>
-
-        <section> 
             <div>
-                {/* our products */}
-                <div>
-                    <h1 className="text-3xl text-center font-bold mt-15 mb-7">Related Products</h1>
-                    <div className="flex justify-center text-left px-5">
-                        <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
-                            {products
-                            .slice() // clone mảng
-                            .sort(() => 0.5 - Math.random())
-                            .slice(0, 4)
-                            .map((p, i) => (
-                                <ProductCard
-                                key={i}
-                                img={p.img}
-                                name={p.name}
-                                desc={p.desc}
-                                price={p.price}
-                                />
-                            ))}
-                            </div>
-                    </div>
-                    <Link href={"/shop"}>
-                        <button
-                                className=" mt-8 px-15 py-3 border border-yellow-500 text-yellow-500 font-semibold hover:bg-yellow-500 hover:text-white transition block mx-auto "
-                            >
-                                SHOW MORE
-                        </button>
-                    </Link>
+                <h1 className="text-3xl text-center font-bold mt-15 mb-7">
+                Related Products
+                </h1>
+
+                <div className="flex justify-center text-left px-5">
+                <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
+                    {relatedProducts.map((p) => (
+                    <ProductCard
+                        key={p.id}
+                        id={p.id}
+                        img={p.img}
+                        name={p.name}
+                        desc={p.desc}
+                        price={p.price}
+                        oldPrice={p.oldPrice}
+                        badge={p.badge}
+                    />
+                    ))}
                 </div>
+                </div>
+
+                <Link href="/shop">
+                <button
+                    className="mt-8 px-15 py-3 border border-yellow-500 text-yellow-500 
+                            font-semibold hover:bg-yellow-500 hover:text-white 
+                            transition block mx-auto"
+                >
+                    SHOW MORE
+                </button>
+                </Link>
             </div>
-        </section>
+            </section>
+
 
         < Footer />
       </main>
