@@ -5,12 +5,12 @@ export default function BannerFooter() {
   return (
     <main>
         <section className="w-full bg-[#FAF3EA] py-12 mt-5">
-            <div className="max-w-8xl ml-15 mx-auto grid grid-cols-4 gap-10">
+            <div className="grid grid-cols-1 gap-10 md:grid-cols-4 pl-20 mx-auto">
                 <div className="flex items-center gap-4">
                     <span className="text-4xl">🏆</span>
                     <div>
                     <h3 className="text-lg font-bold">High Quality</h3>
-                    <p className="text-gray-500 text-sm">crafted from top materials</p>
+                    <p className="text-gray-500 text-sm">Crafted from top materials</p>
                     </div>
                 </div>
 

@@ -2,12 +2,12 @@
 import Image from "next/image";
 import Link from "next/link";
 
-import ProductCard from "./components/ProductCard";
+import ProductCard from "./components/product/ProductCard";
 import { products } from "./mockup/products";
 
-import Header from "./components/Header";
-import Slider from "./components/Slider";
-import Footer from "./components/Footer";
+import Header from "./components/layout/Header";
+import Slider from "./components/home/Slider";
+import Footer from "./components/layout/Footer";
 
 export default function Home() {
   return (
@@ -106,69 +106,75 @@ export default function Home() {
       </section>
 
       <section> 
-        <div>
-          {/* our products */}
-          <div>
-            <h1 className="text-3xl text-center font-bold mt-15 mb-7">Related Products</h1>
-            <div className="flex justify-center text-left px-5">
-              <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
-                {products
-                .slice() // clone mảng
-                .sort(() => 0.5 - Math.random())
-                .slice(0, 4)
-                .map((p, i) => (
-                  <ProductCard
-                  key={i}
-                  img={p.img}
-                  name={p.name}
-                  desc={p.desc}
-                  price={p.price}
-                  />
-                ))}
-                </div>
-            </div>
-            <Link href={"/shop"}>
-              <button
-                className=" mt-8 px-15 py-3 border border-yellow-500 text-yellow-500 font-semibold hover:bg-yellow-500 hover:text-white transition block mx-auto "
-            >
-                SHOW MORE
-              </button>
-            </Link>
+        <div className="mb-15">
+          <h1 className="text-3xl text-center font-bold mt-15 mb-7">Related Products</h1>
+          <div className="flex justify-center text-left px-5">
+            <div className="grid gap-8 md:grid-cols-3 lg:grid-cols-4">
+              {products
+              .slice() // clone mảng
+              .sort(() => 0.5 - Math.random())
+              .slice(0, 4)
+              .map((p, i) => (
+                <ProductCard
+                key={i}
+                id={p.id}
+                img={p.img}
+                name={p.name}
+                desc={p.desc}
+                price={p.price}
+                />
+              ))}
+              </div>
           </div>
+          <Link href={"/shop"}>
+            <button
+              className=" mt-8 px-15 py-3 border border-yellow-500 text-yellow-500 font-semibold hover:bg-yellow-500 hover:text-white transition block mx-auto "
+          >
+              SHOW MORE
+            </button>
+          </Link>
         </div>
       </section>
 
       <section>
-        <div className="bg-[#FFF3E3] w-1440px h-560px"> 
-          {/* inspiration */}
-          <div className="items-center grid grid-cols-[30%_60%] gap-4 mt-6 ">
-            {/* text */}
-            <div className="text-justify pl-20">
+        <div className="w-full bg-[#FFF3E3]">
+          <div className="mx-auto max-w-7xl px-4 sm:px-6 lg:px-8 py-10">
+            {/* mobile: 1 cột | md+: 2 cột */}
+            <div className="grid grid-cols-1 md:grid-cols-[20%_80%] items-center gap-8">
+              {/* text */}
               <div className="text-left">
-                <h2 className="text-3xl font-bold mb-2">
-                50+ Beautiful rooms inspiration</h2>
-                  <p className="text-gray-600 mb-6">
-                      Our designer already made a lot of beautiful prototype of rooms that inspire you
-                  </p>
-                <button className="px-6 py-3 bg-yellow-600 text-white font-semibold hover:bg-[#a0781f] transition" >
-                    Explore More
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold mb-3">
+                  50+ Beautiful rooms inspiration
+                </h2>
+
+                <p className="text-gray-600 mb-6 text-sm sm:text-base">
+                  Our designer already made a lot of beautiful prototype of rooms that inspire you
+                </p>
+
+                <button className="px-6 py-3 bg-yellow-600 text-white font-semibold hover:bg-[#a0781f] transition rounded">
+                  Explore More
                 </button>
               </div>
-            </div>
 
-            <div className="w-full mx-auto items-center h-[520px]">
-              <Slider/>
+              {/* slider */}
+              <div className="w-full">
+                {/* gợi ý: set chiều cao cho slider theo breakpoint */}
+                <div className="h-[280px] sm:h-[380px] md:h-[420px] lg:h-[480px]">
+                  <Slider />
+                </div>
+              </div>
             </div>
           </div>
         </div>
       </section>
+
 
       <section>
         <div>
           {/*share*/}
           <div>
-            <div className="text-center">
-              <h1 className="text-lg mt-10">Share your setup with </h1>
+            <div className="text-center mt-15 mb-5">
+              <h1 className="text-lg">Share your setup with </h1>
               <h2 className="text-3xl font-bold">#FuniroFurniture</h2>
             </div>
 
